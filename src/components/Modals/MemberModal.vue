@@ -22,6 +22,7 @@
 <script>
 import $http from '@/services/httpService';
 import CreateTeamModal from '@/components/Modals/CreateTeamModal.vue';
+import EditTeamModal from '@/components/Modals/EditTeamModal.vue';
 
 export default {
   data() {
@@ -52,11 +53,21 @@ export default {
       this.users = response.data.users
     },
     back() {
-      this.$store.dispatch('modals/selectModal', CreateTeamModal)
+      const params = this.$route.params
+      if(Object.keys(params)[0] === 'team_id') this.$store.dispatch('modals/selectModal', EditTeamModal)
+      else this.$store.dispatch('modals/selectModal', CreateTeamModal)
     },
     decision() {
-      this.$store.dispatch('modals/members', this.member)
-      this.$store.dispatch('modals/selectModal', CreateTeamModal)
+      const crud = this.$store.getters['modals/crud']
+
+      if(crud === 'edit') {
+        this.$store.dispatch('teams/addMember', this.member)
+        this.$store.dispatch('modals/selectModal', EditTeamModal)
+      }
+      else {
+        this.$store.dispatch('modals/members', this.member)
+        this.$store.dispatch('modals/selectModal', CreateTeamModal)
+      }
     }
   }
 }
