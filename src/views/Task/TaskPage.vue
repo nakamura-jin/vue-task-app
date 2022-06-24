@@ -32,9 +32,9 @@
                 >
                   <span class="task__number">No.{{ task.task_count }}</span>
                   <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'beforeWork'" @click.stop @click="openConfirmModal(task.id)">
-                    <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can"/>
+                    <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can" />
                   </button>
-                  <button class="task__delete" v-else-if="mobile" @click.stop>
+                  <button class="task__delete" v-else-if="mobile" @click.stop @click="openMobileMoveTask(task)">
                     <font-awesome-icon class="task__icon-mobile" icon="fa-solid fa-ellipsis" />
                   </button>
                   <p class="task__title">{{ task.title }}</p>
@@ -66,10 +66,10 @@
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
                   <span class="task__number">No.{{ task.task_count }}</span>
-                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'inProcess'" @click.stop  @click="openConfirmModal(task.id)">
+                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'inProcess'" @click="openConfirmModal(task.id)" @click.stop>
                     <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can" />
                   </button>
-                  <button class="task__delete" v-else-if="mobile" @click.stop>
+                  <button class="task__delete" v-else-if="mobile" @click="openMobileMoveTask(task)" @click.stop>
                     <font-awesome-icon class="task__icon-mobile" icon="fa-solid fa-ellipsis" />
                   </button>
                   <p class="task__title">{{ task.title }}</p>
@@ -101,10 +101,10 @@
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
                   <span class="task__number">No.{{ task.task_count }}</span>
-                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'inConfirmation'" @click.stop  @click="openConfirmModal(task.id)">
+                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'inConfirmation'" @click="openConfirmModal(task.id)" @click.stop>
                     <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can" />
                   </button>
-                  <button class="task__delete" v-else-if="mobile" @click.stop>
+                  <button class="task__delete" v-else-if="mobile" @click="openMobileMoveTask(task)" @click.stop>
                     <font-awesome-icon class="task__icon-mobile" icon="fa-solid fa-ellipsis" />
                   </button>
                   <p class="task__title">{{ task.title }}</p>
@@ -125,21 +125,21 @@
               <draggable group="ITEMS" :animation="200" @end="onEnd" handle=".task__card">
                 <div
                   v-for="(task, index) in completion" :key="task.id"
+                  @click="select(task.id)"
                   :class=" mobile ? 'task__card-mobile' : 'task__card' "
                   :style="{
                     background: `${ !mobile && icon && hoverIndex === index && progress === 'completaion' ? '#EEE' : '' }`,
                     display: `${ mobile && columnToggle && card_progress === 'completaion' || !mobile ? 'block' : 'none' }`,
                     transition: `${ columnToggle ? '0.1s' : '0.1s' }`,
                   }"
-                  @click="select(task.id)"
                   @mouseover="onMouse(index, 'completaion')"
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
                   <span class="task__number">No.{{ task.task_count }}</span>
                   <button class="task__done" v-if="!mobile" @click.stop :style="{ background: `${ icon && hoverIndex === index && progress === 'completaion' ? '#EEE' : '' }` }" >
-                    <font-awesome-icon class="task__done-icon" icon="fa-solid fa-check" @click.stop @click="openConfirmModal(task.id)" />
+                    <font-awesome-icon class="task__done-icon" icon="fa-solid fa-check" @click="openConfirmModal(task.id)" @click.stop />
                   </button>
-                  <button class="task__done" v-else @click.stop>
+                  <button class="task__done" v-else @click="openMobileMoveTask(task)" @click.stop>
                     <font-awesome-icon class="task__done-icon" icon="fa-solid fa-check" />
                   </button>
                   <p class="task__title">{{ task.title }}</p>
@@ -162,6 +162,7 @@ import draggable from 'vuedraggable'
 import $http from '@/services/httpService'
 import TaskDetailModal from '@/components/Modals/TaskDetailModal'
 import ConfirmModal from '@/components/Modals/ConfirmModal'
+import MobileMoveTaskModal from '@/components/Modals/MobileMoveTaskModal'
 
 export default {
   mixins: [ taskMixin ],
@@ -296,6 +297,12 @@ export default {
         this.card_progress = card_progress
       }
     },
+
+    openMobileMoveTask(task) {
+      this.$store.dispatch('modals/isModal', true)
+      this.$store.dispatch('modals/selectModal', MobileMoveTaskModal)
+      this.$store.dispatch('tasks/mobile_edit_task', task)
+    }
   }
 }
 </script>

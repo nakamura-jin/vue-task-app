@@ -101,7 +101,7 @@
     width: 28px;
     height: 20px;
     margin-top: 6px;
-    z-index: 1000;
+    z-index: 500;
   }
 
   &__top {
@@ -135,9 +135,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 70%;
+    display: flex;
+    width: 100%;
     height: 100vh;
-    background: $sub-color;
     z-index: 500;
     transform: translate(100%, 0);
     transition: 0.25s;
@@ -145,7 +145,8 @@
 
   &__list {
     width: 100%;
-    margin-top: 60px;
+    padding-top: 60px;
+    background: $sub-color;
   }
 
   &__list-item {
@@ -155,11 +156,18 @@
     padding-left: 10px;
     border-bottom: 1px solid $base-color;
   }
+
+  &__out {
+    width: 30%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 300;
+  }
 }
 
 .open {
   transform: translate(0, 0);
-  z-index: 500;
+  z-index: 400;
 }
 
 .open-top {

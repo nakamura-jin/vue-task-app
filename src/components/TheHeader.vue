@@ -13,13 +13,14 @@
           <span v-if=" !mobile && role === 1" @click="nav = !nav" v-click-outside="closeList" class="header__icon"><font-awesome-icon icon="fa-solid fa-user" /></span>
           <button v-else-if=" !mobile && role === 2" class="header__logout-button" @click="logout">ログアウト</button>
           <!-- スマホのメニューボタンとメニューリスト -->
-          <div v-else class="menu__button" @click="toggle = !toggle" v-click-outside="closeMobileMenu">
+          <div v-else class="menu__button" @click="toggle = !toggle">
             <div class="menu__top" :class="{ 'open-top': toggle }"></div>
             <div class="menu__middle" :class="{ 'open-middle': toggle }"></div>
             <div class="menu__bottom" :class="{ 'open-bottom': toggle }"></div>
           </div>
           <template>
             <div class="menu__nav" :class="{'open': toggle}">
+              <div class="menu__out" @click="closeMobileMenu"></div>
               <ul class="menu__list">
                 <li class="menu__list-item" @click="register">社員登録</li>
                 <li class="menu__list-item" @click="goTop">トップに戻る</li>
