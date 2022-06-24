@@ -20,8 +20,8 @@
           </div>
           <template>
             <div class="menu__nav" :class="{'open': toggle}">
-              <div class="menu__out"></div>
-              <ul class="menu__list" v-click-outside="closeMobileMenu">
+              <div class="menu__out" @click="closeMobileMenu"></div>
+              <ul class="menu__list">
                 <li class="menu__list-item" @click="register">社員登録</li>
                 <li class="menu__list-item" @click="goTop">トップに戻る</li>
                 <li class="menu__list-item" @click="logout">ログアウト</li>
