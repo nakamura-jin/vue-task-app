@@ -8,6 +8,7 @@ export default {
     task_id: null,
     select_task: {},
     delete_task_id: null,
+    mobile_edit_task: {},
   },
 
   /**********************************************
@@ -17,6 +18,7 @@ export default {
     task_id: (state) => state.task_id,
     select_task: (state) => state.select_task,
     delete_task_id: (state) => state.delete_task_id,
+    mobile_edit_task: (state) => state.mobile_edit_task,
   },
 
   /**********************************************
@@ -35,6 +37,9 @@ export default {
     DELETE_TASK_ID(state, id) {
       state.delete_task_id = id;
     },
+    EDIT_TASK_ID(state, object) {
+      state.mobile_edit_task = object;
+    },
   },
 
   /**********************************************
@@ -52,6 +57,9 @@ export default {
     },
     delete_task_id({ commit }, id) {
       commit('DELETE_TASK_ID', id);
+    },
+    mobile_edit_task({ commit }, object) {
+      commit('EDIT_TASK_ID', object);
     },
   },
 };
