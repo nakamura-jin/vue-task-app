@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Root from '../views/Root'
 import { authGuard } from '@/router/authGuard'
 
 Vue.use(VueRouter)
@@ -11,9 +12,20 @@ const routes = [
       import(/* webpackChunkName: "Login" */ '../views/Login/Login.vue'),
   },
   {
-    path: '/top',
-    beforeEnter: authGuard,
-    component: () => import(/* webpackChunkName: "Top" */ '../views/Top.vue'),
+    path: '/',
+    component: Root,
+    children: [
+      {
+        path: '/',
+        redirect: 'top',
+      },
+      {
+        path: 'top',
+        beforeEnter: authGuard,
+        component: () =>
+          import(/* webpackChunkName: "Top" */ '../views/Top.vue'),
+      },
+    ],
   },
 ];
 
