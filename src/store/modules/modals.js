@@ -11,6 +11,7 @@ export default {
     crud: '',
     edit: false,
     create: false,
+    beforeModal: '',
   },
 
   /**********************************************
@@ -23,6 +24,7 @@ export default {
     crud: (state) => state.crud,
     edit: (state) => state.edit,
     create: (state) => state.create,
+    beforeModal: (state) => state.beforeModal,
   },
 
   /**********************************************
@@ -56,6 +58,10 @@ export default {
     ON_CREATE(state, bool) {
       state.create = bool;
     },
+    BEFORE_MODAL(state, modal) {
+      state.beforeModal = modal;
+    },
+    beforeModal: (state) => state.beforeModal,
   },
 
   /**********************************************
@@ -82,6 +88,9 @@ export default {
     },
     onCreate({ commit }, bool) {
       commit('ON_CREATE', bool);
+    },
+    beforeModal({ commit }, modal) {
+      commit('BEFORE_MODAL', modal);
     },
   },
 };

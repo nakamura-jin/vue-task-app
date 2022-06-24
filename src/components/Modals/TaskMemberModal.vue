@@ -16,6 +16,7 @@
 
 <script>
 import CreateTaskModal from '@/components/Modals/CreateTaskModal'
+import TaskDetailModal from '@/components/Modals/TaskDetailModal'
 
 export default {
   computed: {
@@ -25,8 +26,21 @@ export default {
   },
   methods: {
     select(member) {
+      const modal = this.$store.getters['modals/beforeModal']
+      const id = this.$store.getters['tasks/task_id']
+      if(modal === 'TaskDetailModal') {
+        const tasks = this.$store.getters['teams/task_team'].tasks
+        for(let i = 0; i < tasks.length; i++) {
+          if(tasks[i].id === id) {
+            this.$store.dispatch('modals/onEdit', true)
+            this.$store.dispatch('teams/editTaskMember', {id: tasks[i].id, user_id: member.id, user_name: member.name})
+            this.$store.dispatch('modals/selectModal', TaskDetailModal)
+          }
+        }
+      } else {
         this.$store.dispatch('teams/taskUser', member)
         this.$store.dispatch('modals/selectModal', CreateTaskModal)
+      }
     }
   }
 }

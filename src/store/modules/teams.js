@@ -58,6 +58,14 @@ export default {
     TASK_USER(state, member) {
       state.task_user = member;
     },
+    EDIT_TASK_MEMBER(state, taskData) {
+      state.task_team.tasks.forEach((task) => {
+        if (task.id === taskData.id) {
+          task.user_id = taskData.user_id;
+          task.user_name = taskData.user_name;
+        }
+      });
+    },
   },
 
   /**********************************************
@@ -84,6 +92,9 @@ export default {
     },
     taskUser({ commit }, member) {
       commit('TASK_USER', member);
+    },
+    editTaskMember({ commit }, taskData) {
+      commit('EDIT_TASK_MEMBER', taskData);
     },
   },
 };
