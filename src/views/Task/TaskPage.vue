@@ -26,6 +26,7 @@
                     display: `${ mobile && columnToggle && card_progress === 'beforeWork' || !mobile ? 'block' : 'none' }`,
                     transition: `${ columnToggle ? '0.1s' : '0.1s' }`,
                   }"
+                  @click="select(task.id)"
                   @mouseover="onMouse(index, 'beforeWork')"
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
@@ -60,6 +61,7 @@
                     display: `${ mobile && columnToggle && card_progress === 'in-process' || !mobile ? 'block' : 'none' }`,
                     transition: `${ columnToggle ? '0.1s' : '0.1s' }`,
                   }"
+                  @click="select(task.id)"
                   @mouseover="onMouse(index, 'inProcess')"
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
@@ -94,6 +96,7 @@
                     display: `${ mobile && columnToggle && card_progress === 'in-confirmation' || !mobile ? 'block' : 'none' }`,
                     transition: `${ columnToggle ? '0.1s' : '0.1s' }`,
                   }"
+                  @click="select(task.id)"
                   @mouseover="onMouse(index, 'inConfirmation')"
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
@@ -128,6 +131,7 @@
                     display: `${ mobile && columnToggle && card_progress === 'completaion' || !mobile ? 'block' : 'none' }`,
                     transition: `${ columnToggle ? '0.1s' : '0.1s' }`,
                   }"
+                  @click="select(task.id)"
                   @mouseover="onMouse(index, 'completaion')"
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
@@ -156,7 +160,7 @@ import $blockui from '@/services/blockuiService'
 import taskMixin from '@/mixins/taskMixin'
 import draggable from 'vuedraggable'
 import $http from '@/services/httpService'
-// import TaskDetailModal from '@/components/Modals/TaskDetailModal'
+import TaskDetailModal from '@/components/Modals/TaskDetailModal'
 import ConfirmModal from '@/components/Modals/ConfirmModal'
 
 export default {
@@ -246,6 +250,20 @@ export default {
       });
       await $http.put(`/task/${query["id"]}`, query);
       this.getTeam()
+    },
+
+    /**
+     * タスク詳細を開く
+     */
+    select(id) {
+      const selectTask = this.team.tasks;
+      selectTask.forEach((task) => {
+        if (task.id === id) {
+          this.$store.dispatch("tasks/selectTask", task);
+          this.$store.dispatch("modals/isModal", true);
+          this.$store.dispatch("modals/selectModal", TaskDetailModal);
+        }
+      });
     },
 
     /**
