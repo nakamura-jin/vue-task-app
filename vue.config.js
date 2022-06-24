@@ -5,5 +5,14 @@ module.exports = {
         prependData: `@import "@/styles/global.scss";`,
       },
     },
+    extract: {
+      ignoreOrder: true
+    },
+  },
+  configureWebpack: {
+    performance: {
+      maxEntrypointSize: 600000,
+      maxAssetSize: 600000,
+    },
   },
 };
