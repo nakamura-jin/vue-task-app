@@ -1,0 +1,33 @@
+/**
+ * ConfirmModal
+ */
+
+.confirm {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 340px;
+  }
+
+  &__button {
+    margin-top: 40px;
+  }
+
+  &__back {
+    margin-right: 20px;
+    border: 2px solid $base-color;
+    background: #fff;
+    color: $base-color;
+  }
+
+  &__delete {
+    background: red;
+  }
+}
+
+button {
+  @include button-style(80px);
+  border: none;
+}

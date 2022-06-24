@@ -1,0 +1,21 @@
+/**
+ * sideber
+ */
+
+.sidebar {
+  width: 200px;
+  height: calc(100vh - 64px);
+  border: 2px solid $back-color;
+
+  &__list {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    border: none;
+    border-bottom: 2px solid $back-color;
+    &:hover {
+      background: $sub-color;
+      color: #fff;
+    }
+  }
+}
