@@ -7,6 +7,7 @@ export default {
   state: {
     task_id: null,
     select_task: {},
+    delete_task_id: null,
   },
 
   /**********************************************
@@ -15,6 +16,7 @@ export default {
   getters: {
     task_id: (state) => state.task_id,
     select_task: (state) => state.select_task,
+    delete_task_id: (state) => state.delete_task_id,
   },
 
   /**********************************************
@@ -30,6 +32,9 @@ export default {
     DELETE_MEMBER(state) {
       state.select_task.user_name = '';
     },
+    DELETE_TASK_ID(state, id) {
+      state.delete_task_id = id;
+    },
   },
 
   /**********************************************
@@ -44,6 +49,9 @@ export default {
     },
     deleteMember({ commit }) {
       commit('DELETE_MEMBER');
+    },
+    delete_task_id({ commit }, id) {
+      commit('DELETE_TASK_ID', id);
     },
   },
 };
