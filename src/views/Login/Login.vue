@@ -2,7 +2,7 @@
   @import './Login.scss';
 </style>
 <template>
-  <div class="login">
+  <div class="login" :style="{ height: `${ mobile ? innerHeight : '100vh' }` }">
     <div class="login__container">
       <div class="login__logo">
         <div class="login__image">
@@ -36,12 +36,17 @@ export default {
       form: {
         worker_number: null,
         password: ''
-      }
+      },
+      innerHeight: window.innerHeight + 'px'
     }
   },
   computed: {
     disabledLogin() {
       if( this.form.worker_number === null || this.form.worker_number === '' || this.form.password === '' ) return true;
+      return false
+    },
+    mobile() {
+      if(window.visualViewport.width <= 501) return true
       return false
     }
   },
@@ -52,7 +57,7 @@ export default {
     async login() {
       $blockui.show()
       await $auth.login(this.form)
-      this.$router.push('top')
+      this.$router.push('/top')
     }
   }
 }
