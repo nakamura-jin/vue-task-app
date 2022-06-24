@@ -20,6 +20,13 @@ const routes = [
         redirect: 'top',
       },
       {
+        path: 'task/:team_id',
+        component: () =>
+          import(
+            /* webpackChunkName: "TaskPage" */ '../views/Task/TaskPage.vue'
+          ),
+      },
+      {
         path: 'top',
         beforeEnter: authGuard,
         component: () =>
