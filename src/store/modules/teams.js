@@ -66,6 +66,15 @@ export default {
         }
       });
     },
+    DELETE_TASK(state, id) {
+      const tasks = [];
+      state.task_team.tasks.forEach((task) => {
+        if (task.id != id) {
+          tasks.push(task);
+        }
+      });
+      state.task_team.tasks = tasks;
+    },
   },
 
   /**********************************************
@@ -95,6 +104,9 @@ export default {
     },
     editTaskMember({ commit }, taskData) {
       commit('EDIT_TASK_MEMBER', taskData);
+    },
+    delete_task({ commit }, id) {
+      commit('DELETE_TASK', id);
     },
   },
 };

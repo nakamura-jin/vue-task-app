@@ -31,8 +31,8 @@
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
                   <span class="task__number">No.{{ task.task_count }}</span>
-                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'beforeWork'" @click.stop>
-                    <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can" />
+                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'beforeWork'" @click.stop @click="openConfirmModal(task.id)">
+                    <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can"/>
                   </button>
                   <button class="task__delete" v-else-if="mobile" @click.stop>
                     <font-awesome-icon class="task__icon-mobile" icon="fa-solid fa-ellipsis" />
@@ -66,7 +66,7 @@
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
                   <span class="task__number">No.{{ task.task_count }}</span>
-                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'inProcess'" @click.stop>
+                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'inProcess'" @click.stop  @click="openConfirmModal(task.id)">
                     <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can" />
                   </button>
                   <button class="task__delete" v-else-if="mobile" @click.stop>
@@ -101,7 +101,7 @@
                   @mouseleave="[ icon = false, hoverIndex = null, progress = '' ]"
                 >
                   <span class="task__number">No.{{ task.task_count }}</span>
-                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'inConfirmation'" @click.stop>
+                  <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'inConfirmation'" @click.stop  @click="openConfirmModal(task.id)">
                     <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can" />
                   </button>
                   <button class="task__delete" v-else-if="mobile" @click.stop>
@@ -137,7 +137,7 @@
                 >
                   <span class="task__number">No.{{ task.task_count }}</span>
                   <button class="task__done" v-if="!mobile" @click.stop :style="{ background: `${ icon && hoverIndex === index && progress === 'completaion' ? '#EEE' : '' }` }" >
-                    <font-awesome-icon class="task__done-icon" icon="fa-solid fa-check" @click.stop />
+                    <font-awesome-icon class="task__done-icon" icon="fa-solid fa-check" @click.stop @click="openConfirmModal(task.id)" />
                   </button>
                   <button class="task__done" v-else @click.stop>
                     <font-awesome-icon class="task__done-icon" icon="fa-solid fa-check" />
