@@ -1,0 +1,39 @@
+/**
+ * TaskMemberModal
+ */
+
+.task-member {
+  &__ttl {
+    text-align: center;
+    margin: 20px 0;
+  }
+  & ul {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 200px;
+    border: 2px solid $sub-color;
+    &:last-of-type {
+      border-bottom: 1px solid $sub-color;;
+    }
+  }
+
+  &__select {
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    padding: 0;
+    background: #fff;
+    border-color: $sub-color;
+    border: none;
+    border-bottom: 1px solid $sub-color;
+    &:nth-child(odd) {
+      border-right: 1px solid $sub-color;
+    }
+    &:nth-child(odd):last-child {
+      border-bottom: none;
+    }
+    &:hover {
+      background-color: $sub-color;
+    }
+  }
+}
