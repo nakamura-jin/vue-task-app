@@ -1,0 +1,109 @@
+/**
+ * top
+ */
+
+.top {
+  width: 100%;
+  margin-bottom: 80px;
+  padding-top: 80px;
+  background-color: #fff;
+  @include mq('md') {
+    padding-top: 100px;
+    margin-bottom: 0px;
+  }
+
+  &__flash-message {
+    position: absolute;
+    top: 100px;
+    left: 40%;
+    background: lime;
+    padding: 10px 40px;
+    border-radius: 10px;
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+    margin: 0 auto;
+    @include mq('md') {
+      width: 960px;
+    }
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 42%;
+    height: 100px;
+    margin: 10px;
+    background: #fff;
+    border-radius: 15px;
+    border: 2px solid $sub-color;
+    cursor: pointer;
+    & p {
+      font-weight: bold;
+    }
+    @include mq('md') {
+      width: 160px;
+      height: 160px;
+    }
+  }
+
+  &__dot {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    @include mq('md') {
+      top: 20px;
+      right: 19px;
+    }
+  }
+
+  &__menu-list {
+    position: absolute;
+    right: 10px;
+    width: 80%;
+    font-size: 12px;
+    border: 2px solid $sub-color;
+    @include mq('md') {
+
+    }
+  }
+
+  &__list {
+    background: #fff;
+    border-bottom: 1px solid $sub-color;
+    padding: 10px 10px;
+    &:last-of-type {
+      border: none;
+    }
+    &:hover {
+      background: $sub-color;
+    }
+  }
+
+  &__leader {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 8px;
+    @include mq('md') {
+      bottom: 20px;
+      right: 20px;
+      font-size: 12px;
+    }
+  }
+
+  &__icon {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: $sub-color;
+    @include mq('md') {
+      font-size: 36px;
+    }
+  }
+}

@@ -1,0 +1,79 @@
+/**
+ * CreateTeamModal
+ */
+
+.create-team {
+  margin-top: 50px;
+
+  &__container {
+    & input {
+      width: 100%;
+      height: 40px;
+      padding: 0 10px;
+      margin-bottom: 15px;
+      font-size: 24px;
+      border-radius: 5px;
+      border: 2px solid $sub-color;
+    }
+  }
+
+  &__label-group_name {
+    display: block;
+    padding-bottom: 10px;
+  }
+
+  &__member {
+    display: flex;
+    padding-bottom: 10px;
+  }
+
+  &__member-area {
+    height: 110px;
+    padding: 10px;
+    border: 2px solid $sub-color;
+    border-radius: 5px;
+  }
+
+  &__member-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__tip {
+    padding: 6px 20px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    background: $base-color;
+    color: $sub-color;
+    margin-right: 10px;
+  }
+
+  &__delete {
+    margin-left: 10px;
+  }
+
+  &__label-member {
+    line-height: 24px;
+  }
+
+  &__icon {
+    margin-left: 12px;
+    font-size: 24px;
+    color: $sub-color;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: right;
+    margin-top: 30px;
+  }
+
+  &__disabled {
+    background: #ccc;
+  }
+}
+
+button {
+  @include button-style(80px);
+  border: none;
+}

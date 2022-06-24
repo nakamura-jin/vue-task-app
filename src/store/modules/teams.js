@@ -1,35 +1,26 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import teams from './modules/teams'
-import modals from './modules/modals'
+export default {
+  namespaced: true,
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  modules: {
-    teams,
-    modals
-  },
   /**********************************************
    * state
    **********************************************/
   state: {
-    isLoading: false,
+    teams: [],
   },
 
   /**********************************************
    * getters
    **********************************************/
   getters: {
-    isLoading: (state) => state.isLoading,
+    teams: (state) => state.teams,
   },
 
   /**********************************************
    * mutations
    **********************************************/
   mutations: {
-    IS_LOADING(state, bool) {
-      state.isLoading = bool;
+    TEAMS(state, teams) {
+      state.teams = teams;
     },
   },
 
@@ -37,8 +28,8 @@ export default new Vuex.Store({
    * actions
    **********************************************/
   actions: {
-    isLoading({ commit }, bool) {
-      commit('IS_LOADING', bool);
+    setTeams({ commit }, teams) {
+      commit('TEAMS', teams);
     },
   },
-});
+};
