@@ -3,6 +3,9 @@
 </style>
 <template>
   <div class="top">
+    <template v-if="$store.getters['flash_message']">
+      <p class="top__flash-message"><font-awesome-icon class="top__message-icon" icon="fa-solid fa-check" /> 社員登録が完了しました</p>
+    </template>
     <div class="top__container">
       <div class="top__card" v-if="!mobileWidth" @click="createTeam" @mouseover="createCard = true" @mouseleave="createCard = false" :style="{ background: `${ createCard ? '#ddd' : '' }` }">
         <font-awesome-icon class="top__icon" icon="fa-solid fa-circle-plus" />
@@ -16,13 +19,13 @@
           @mouseleave="menu = false, list = false"
           :style="{ background: `${ menu && hoverIndex === index  ? '#eee' : ''}` }"
         >
-          <font-awesome-icon v-if="menu && hoverIndex === index" class="top__dot" icon="fa-solid fa-ellipsis" />
-          <font-awesome-icon v-else-if="mobileWidth" class="top__dot" icon="fa-solid fa-ellipsis" />
+          <font-awesome-icon v-if="menu && hoverIndex === index" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
+          <font-awesome-icon v-else-if="mobileWidth" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
           <template v-if="list && listIndex === index">
             <div class="top__menu-list">
               <ul>
-                <li class="top__list">グループ編集</li>
-                <li class="top__list">削除</li>
+                <li class="top__list" @click="editTeam(team)">グループ編集</li>
+                <li class="top__list" @click="deleteTeam(team.id)">削除</li>
               </ul>
             </div>
           </template>
@@ -39,12 +42,12 @@
           @mouseleave="menu = false, list = false"
           :style="{ background: `${ menu && hoverIndex === index  ? '#eee' : ''}` }"
         >
-          <font-awesome-icon v-if="menu && hoverIndex === index" class="top__dot" icon="fa-solid fa-ellipsis" />
+          <font-awesome-icon v-if="menu && hoverIndex === index" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
           <template v-if="list && listIndex === index">
             <div class="top__menu-list">
               <ul>
-                <li class="top__list">グループ編集</li>
-                <li class="top__list">削除</li>
+                <li class="top__list" @click="editTeam(team)">グループ編集</li>
+                <li class="top__list" @click="deleteTeam(team.id)">削除</li>
               </ul>
             </div>
           </template>
@@ -57,9 +60,12 @@
 </template>
 
 <script>
+import CreateTeamModal from '@/components/Modals/CreateTeamModal.vue'
 import teamMixin from '@/mixins/teamMixin'
+import $blockui from '@/services/blockuiService'
+import EditTeamModal from '@/components/Modals/EditTeamModal.vue'
+import ConfirmModal from '@/components/Modals/ConfirmModal.vue'
 import Store from '@/store'
-import CreateTeamModal from '@/components/Modals/CreateTeamModal'
 
 export default {
   mixins: [ teamMixin ],
@@ -93,11 +99,14 @@ export default {
   },
   methods: {
     createTeam() {
+      this.$store.dispatch('modals/crud', 'create')
       this.$store.dispatch('modals/isModal', true)
       this.$store.dispatch('modals/selectModal', CreateTeamModal)
     },
     selectTeam(id) {
-      console.log(id)
+      if(this.list === true) return this.closeList()
+      $blockui.show();
+      this.$router.push({path: '/task/' + id, params: {id: id}})
     },
 
     onMouse(index) {
@@ -109,6 +118,23 @@ export default {
       this.list = true
       this.listIndex = index
     },
+
+    closeList() {
+      this.list = false
+      this.listIndex = null
+    },
+
+    editTeam(team) {
+      this.$store.dispatch("teams/setTaskTeam", team)
+      this.$store.dispatch('modals/isModal', true)
+      this.$store.dispatch('modals/selectModal', EditTeamModal)
+    },
+
+    deleteTeam(id) {
+      this.$store.dispatch('teams/delete_team_id', id)
+      this.$store.dispatch('modals/isModal', true)
+      this.$store.dispatch('modals/selectModal', ConfirmModal)
+    }
   },
 }
 </script>
