@@ -8,6 +8,7 @@ export default {
     teams: [],
     task_team: [],
     delete_team_id: null,
+    task_user: null,
   },
 
   /**********************************************
@@ -17,6 +18,7 @@ export default {
     teams: (state) => state.teams,
     task_team: (state) => state.task_team,
     delete_team_id: (state) => state.delete_team_id,
+    task_user: (state) => state.task_user,
   },
 
   /**********************************************
@@ -53,6 +55,9 @@ export default {
       });
       state.teams = teams;
     },
+    TASK_USER(state, member) {
+      state.task_user = member;
+    },
   },
 
   /**********************************************
@@ -76,6 +81,9 @@ export default {
     },
     delete_team({ commit }, team_id) {
       commit('DELETE_TEAM', team_id);
+    },
+    taskUser({ commit }, member) {
+      commit('TASK_USER', member);
     },
   },
 };

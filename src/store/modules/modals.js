@@ -10,6 +10,7 @@ export default {
     members: [],
     crud: '',
     edit: false,
+    create: false,
   },
 
   /**********************************************
@@ -21,6 +22,7 @@ export default {
     members: (state) => state.members,
     crud: (state) => state.crud,
     edit: (state) => state.edit,
+    create: (state) => state.create,
   },
 
   /**********************************************
@@ -51,6 +53,9 @@ export default {
     ON_EDIT(state, bool) {
       state.edit = bool;
     },
+    ON_CREATE(state, bool) {
+      state.create = bool;
+    },
   },
 
   /**********************************************
@@ -74,6 +79,9 @@ export default {
     },
     onEdit({ commit }, bool) {
       commit('ON_EDIT', bool);
+    },
+    onCreate({ commit }, bool) {
+      commit('ON_CREATE', bool);
     },
   },
 };
