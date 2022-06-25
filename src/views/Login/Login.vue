@@ -37,7 +37,7 @@ export default {
         worker_number: null,
         password: ''
       },
-      innerHeight: window.innerHeight + 'px'
+      innerHeight: window.innerHeight + 'px',
     }
   },
   computed: {
