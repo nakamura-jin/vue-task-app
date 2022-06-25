@@ -4,7 +4,8 @@ import get from 'lodash/get';
 import { rejectService } from '@/router/authGuard';
 import $blockui from '@/services/blockuiService';
 
-axios.defaults.baseURL="http://localhost:8000/api/v1"
+axios.defaults.baseURL = `${process.env.VUE_APP_BASE_URL}/v1`;
+
 
 class AuthService {
   constructor() {
