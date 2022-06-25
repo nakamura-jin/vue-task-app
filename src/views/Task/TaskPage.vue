@@ -34,7 +34,7 @@
                   <button class="task__delete" v-if="!mobile && icon && hoverIndex === index && progress === 'beforeWork'" @click.stop @click="openConfirmModal(task.id)">
                     <font-awesome-icon class="task__icon" icon="fa-solid fa-trash-can" />
                   </button>
-                  <button class="task__delete" v-else-if="mobile" @click.stop @click="openMobileMoveTask(task)">
+                  <button class="task__delete" v-else-if="mobile" @click.stop @click="openMobileMoveTask(task)" >
                     <font-awesome-icon class="task__icon-mobile" icon="fa-solid fa-ellipsis" />
                   </button>
                   <p class="task__title">{{ task.title }}</p>
