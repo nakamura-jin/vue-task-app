@@ -23,6 +23,7 @@
               <div class="menu__out" @click="closeMobileMenu"></div>
               <ul class="menu__list">
                 <li class="menu__list-item" @click="register">社員登録</li>
+                <li class="menu__list-item" @click="createTask" v-if="taskPage">タスクの作成</li>
                 <li class="menu__list-item" @click="goTop">トップに戻る</li>
                 <li class="menu__list-item" @click="logout">ログアウト</li>
               </ul>
@@ -46,6 +47,7 @@
 import $auth from '@/services/authService'
 import ClickOutside from 'vue-click-outside'
 import $blockui from '@/services/blockuiService'
+import CreateTaskModal from '@/components/Modals/CreateTaskModal.vue'
 
 export default {
   name: 'Header',
@@ -64,6 +66,10 @@ export default {
     },
     mobile() {
       if(window.visualViewport.width <= 501) return true
+      return false
+    },
+    taskPage() {
+      if(this.$route.path === `/task/${this.$route.params.team_id}`) return true
       return false
     }
   },
@@ -84,6 +90,11 @@ export default {
       if(this.toggle === true) this.toggle = false
       this.$router.push('/register')
       $blockui.close()
+    },
+    createTask() {
+      this.toggle = false
+      this.$store.dispatch('modals/isModal', true)
+      this.$store.dispatch('modals/selectModal', CreateTaskModal)
     },
     goTop() {
       if(this.$route.path === '/register') sessionStorage.removeItem('new_number')

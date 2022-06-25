@@ -16,19 +16,32 @@
           v-for="(team, index) in teams" :key="index"
           @click="selectTeam(team.id)"
           @mouseover="onMouse(index)"
-          @mouseleave="menu = false, list = false"
-          :style="{ background: `${ menu && hoverIndex === index  ? '#eee' : ''}` }"
+          @mouseleave="menu = false"
+          :style="{ background: `${ !mobileWidth && menu && hoverIndex === index  ? '#eee' : ''}` }"
         >
           <font-awesome-icon v-if="menu && hoverIndex === index" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
           <font-awesome-icon v-else-if="mobileWidth" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
-          <template v-if="list && listIndex === index">
-            <div class="top__menu-list">
+          <template v-if="!mobileWidth && list && listIndex === index">
+            <div class="top__menu-list" v-click-outside="closeList">
               <ul>
                 <li class="top__list" @click="editTeam(team)">グループ編集</li>
                 <li class="top__list" @click="deleteTeam(team.id)">削除</li>
               </ul>
             </div>
           </template>
+          <!-- モバイル時のドットクリックで開くメニュー -->
+          <template v-if="mobileWidth">
+            <div class="mobile-menu" :class="{ 'list-open' : list }">
+              <div class="mobile-menu__container">
+                <ul>
+                  <li class="mobile-menu__list" @click="editTeam(team)">グループ編集</li>
+                  <li class="mobile-menu__list" @click="deleteTeam(team.id)">グループ削除</li>
+                  <li class="mobile-menu__list">キャンセル</li>
+                </ul>
+              </div>
+            </div>
+          </template>
+
           <p>{{ team.name }}</p>
           <span class="top__leader">担当: {{ team.user_name }}</span>
         </div>
@@ -39,18 +52,32 @@
           v-for="(team, index) in teams" :key="index"
           @click="selectTeam(team.id)"
           @mouseover="onMouse(index)"
-          @mouseleave="menu = false, list = false"
-          :style="{ background: `${ menu && hoverIndex === index  ? '#eee' : ''}` }"
+          @mouseleave="menu = false"
+          :style="{ background: `${ !mobileWidth && menu && hoverIndex === index  ? '#eee' : ''}` }"
         >
           <font-awesome-icon v-if="menu && hoverIndex === index" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
-          <template v-if="list && listIndex === index">
-            <div class="top__menu-list">
+          <font-awesome-icon v-else-if="mobileWidth" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
+          <template v-if="!mobileWidth && list && listIndex === index">
+            <div class="top__menu-list" v-click-outside="closeList">
               <ul>
                 <li class="top__list" @click="editTeam(team)">グループ編集</li>
                 <li class="top__list" @click="deleteTeam(team.id)">削除</li>
               </ul>
             </div>
           </template>
+          <!-- モバイル時のドットクリックで開くメニュー -->
+          <template v-if="mobileWidth">
+            <div class="mobile-menu" :class="{ 'list-open' : list }">
+              <div class="mobile-menu__container">
+                <ul>
+                  <li class="mobile-menu__list" @click="editTeam(team)">グループ編集</li>
+                  <li class="mobile-menu__list" @click="deleteTeam(team.id)">グループ削除</li>
+                  <li class="mobile-menu__list">キャンセル</li>
+                </ul>
+              </div>
+            </div>
+          </template>
+
           <p>{{ team.name }}</p>
           <span class="top__leader">担当: {{ team.user_name }}</span>
         </div>
@@ -66,9 +93,11 @@ import $blockui from '@/services/blockuiService'
 import EditTeamModal from '@/components/Modals/EditTeamModal.vue'
 import ConfirmModal from '@/components/Modals/ConfirmModal.vue'
 import Store from '@/store'
+import ClickOutside from 'vue-click-outside'
 
 export default {
   mixins: [ teamMixin ],
+  directives: { ClickOutside },
   beforeRouteEnter(to, from, next) {
     if(from.path === '/register') {
       const fm = Store.getters['flash_message']
