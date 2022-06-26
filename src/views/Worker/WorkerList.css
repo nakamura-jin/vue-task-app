@@ -1,0 +1,38 @@
+/**
+ * WorkerList
+ */
+.worker-list {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.worker-list__container {
+  width: 700px;
+  margin: 0 auto;
+  padding-top: 60px;
+}
+
+.worker-list__title {
+  margin-bottom: 60px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.worker-list__table {
+  width: 100%;
+  border: 2px solid;
+}
+
+th, td {
+  text-align: center;
+  border: 1px solid;
+}
+
+th {
+  padding: 20px 0;
+}
+
+td {
+  padding: 10px 0;
+}

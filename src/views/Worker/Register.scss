@@ -3,11 +3,13 @@
  */
 
 .register {
-  background: $back-color;
-  width: 100vw;
-  height: 100vh;
+  display: flex;
+  width: 100%;
+  height: 100%;
 
   &__container {
+    width: 960px;
+    margin: 0 auto;
     padding-top: 58px;
     @include mq('md') {
       padding-top: 0;
@@ -30,7 +32,7 @@
     margin: 30px auto 0;
     border-radius: 6px;
     padding: 20px;
-    background: #fff;
+    // background: #fff;
     @include mq('md') {
       width: 600px;
       margin: 40px auto 0;
@@ -93,7 +95,7 @@
 }
 
 button {
-  @include button-style(114px);
+  @include button-style(100%);
   border: none;
 }
 

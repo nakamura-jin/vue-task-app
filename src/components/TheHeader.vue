@@ -18,11 +18,11 @@
             <div class="menu__middle" :class="{ 'open-middle': toggle }"></div>
             <div class="menu__bottom" :class="{ 'open-bottom': toggle }"></div>
           </div>
-          <template>
+          <template v-if="mobile">
             <div class="menu__nav" :class="{'open': toggle}">
               <div class="menu__out" @click="closeMobileMenu"></div>
               <ul class="menu__list">
-                <li class="menu__list-item" @click="register">社員登録</li>
+                <li class="menu__list-item" @click="$router.push('worker_list')">社員一覧</li>
                 <li class="menu__list-item" @click="createTask" v-if="taskPage">タスクの作成</li>
                 <li class="menu__list-item" @click="goTop">トップに戻る</li>
                 <li class="menu__list-item" @click="logout">ログアウト</li>
@@ -33,7 +33,7 @@
 
         <div class="header__nav" v-if="nav">
           <ul>
-            <li class="header__list" @click="register">社員登録</li>
+            <li class="header__list" @click="$router.push('worker_list')">社員一覧</li>
             <li class="header__list" @click="goTop">トップに戻る</li>
             <li class="header__list" @click="logout">ログアウト</li>
           </ul>
