@@ -19,8 +19,8 @@
           @mouseleave="menu = false"
           :style="{ background: `${ !mobileWidth && menu && hoverIndex === index  ? '#eee' : ''}` }"
         >
-          <font-awesome-icon v-if="menu && hoverIndex === index" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
-          <font-awesome-icon v-else-if="mobileWidth" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
+          <font-awesome-icon v-if="!mobileWidth && menu && hoverIndex === index" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
+          <font-awesome-icon v-else-if="mobileWidth" @click="openMobileList(team)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
           <template v-if="!mobileWidth && list && listIndex === index">
             <div class="top__menu-list" v-click-outside="closeList">
               <ul>
@@ -29,19 +29,6 @@
               </ul>
             </div>
           </template>
-          <!-- モバイル時のドットクリックで開くメニュー -->
-          <template v-if="mobileWidth">
-            <div class="mobile-menu" :class="{ 'list-open' : list }">
-              <div class="mobile-menu__container">
-                <ul>
-                  <li class="mobile-menu__list" @click="editTeam(team)">グループ編集</li>
-                  <li class="mobile-menu__list" @click="deleteTeam(team.id)">グループ削除</li>
-                  <li class="mobile-menu__list">キャンセル</li>
-                </ul>
-              </div>
-            </div>
-          </template>
-
           <p>{{ team.name }}</p>
           <span class="top__leader">担当: {{ team.user_name }}</span>
         </div>
@@ -55,8 +42,8 @@
           @mouseleave="menu = false"
           :style="{ background: `${ !mobileWidth && menu && hoverIndex === index  ? '#eee' : ''}` }"
         >
-          <font-awesome-icon v-if="menu && hoverIndex === index" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
-          <font-awesome-icon v-else-if="mobileWidth" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
+          <font-awesome-icon v-if="!mobileWidth && menu && hoverIndex === index" @click="openList(index)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
+          <font-awesome-icon v-else-if="mobileWidth" @click="openMobileList(team)" @click.stop class="top__dot" icon="fa-solid fa-ellipsis" />
           <template v-if="!mobileWidth && list && listIndex === index">
             <div class="top__menu-list" v-click-outside="closeList">
               <ul>
@@ -65,21 +52,30 @@
               </ul>
             </div>
           </template>
-          <!-- モバイル時のドットクリックで開くメニュー -->
-          <template v-if="mobileWidth">
-            <div class="mobile-menu" :class="{ 'list-open' : list }">
-              <div class="mobile-menu__container">
-                <ul>
-                  <li class="mobile-menu__list" @click="editTeam(team)">グループ編集</li>
-                  <li class="mobile-menu__list" @click="deleteTeam(team.id)">グループ削除</li>
-                  <li class="mobile-menu__list">キャンセル</li>
-                </ul>
-              </div>
-            </div>
-          </template>
-
           <p>{{ team.name }}</p>
           <span class="top__leader">担当: {{ team.user_name }}</span>
+        </div>
+      </template>
+
+      <!-- モバイル時のドットクリックで開くメニュー -->
+      <template v-if="mobileWidth">
+        <div class="mobile-menu" :class="{ 'list-open' : mobileList }" @click="mobileList = false">
+          <div class="mobile-menu__container">
+            <ul>
+              <li class="mobile-menu__list" @click="editTeam(team)">
+                <font-awesome-icon class="mobile-menu__icon" icon="fa-solid fa-pen" />
+                <span>グループ編集</span>
+              </li>
+              <li class="mobile-menu__list" @click="deleteTeam(team.id)">
+                <font-awesome-icon class="mobile-menu__icon" icon="fa-solid fa-trash-can" />
+                <span>削除</span>
+              </li>
+              <li class="mobile-menu__list" @click="mobileList = false">
+                <font-awesome-icon class="mobile-menu__icon" icon="fa-solid fa-xmark" />
+                <span>キャンセル</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </template>
     </div>
@@ -116,16 +112,29 @@ export default {
       hoverIndex: null,
       list: false,
       listIndex: null,
+      mobileList: false,
+      team: {}
     }
   },
+  /************************************************************
+   * created
+   ************************************************************/
   created() {
     this.getTeams();
   },
+
+  /************************************************************
+   * computed
+   ************************************************************/
   computed: {
     role() {
       return JSON.parse(sessionStorage.getItem('data')).role
     }
   },
+
+  /************************************************************
+   * methods
+   ************************************************************/
   methods: {
     createTeam() {
       this.$store.dispatch('modals/crud', 'create')
@@ -146,6 +155,11 @@ export default {
     openList(index) {
       this.list = true
       this.listIndex = index
+    },
+
+    openMobileList(team) {
+      this.mobileList = true
+      this.team = team
     },
 
     closeList() {
