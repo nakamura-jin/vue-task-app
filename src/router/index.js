@@ -12,20 +12,28 @@ const routes = [
       import(/* webpackChunkName: "Login" */ '../views/Login/Login.vue'),
   },
   {
-    path: '/register',
-    beforeEnter: authGuard,
-    component: () =>
-      import(
-        /* webpackChunkName: "Register" */ '../views/Register/Register.vue'
-      ),
-  },
-  {
     path: '/',
     component: Root,
     children: [
       {
         path: '/',
         redirect: 'top',
+      },
+      {
+        path: '/register',
+        beforeEnter: authGuard,
+        component: () =>
+          import(
+            /* webpackChunkName: "Register" */ '../views/Worker/Register.vue'
+          ),
+      },
+      {
+        path: '/worker_list',
+        beforeEnter: authGuard,
+        component: () =>
+          import(
+            /* webpackChunkName: "WorkerList" */ '../views/Worker/WorkerList.vue'
+          ),
       },
       {
         path: 'task/:team_id',

@@ -3,7 +3,7 @@
 </style>
 <template>
   <div class="register">
-    <the-header></the-header>
+    <the-sidebar v-if="!mobileWidth"></the-sidebar>
     <div class="register__container">
       <h3 class="register__ttl">社員登録</h3>
       <form @submit.prevent="register">
@@ -35,12 +35,12 @@
 
 <script>
 import $blockui from '@/services/blockuiService'
-import TheHeader from '@/components/TheHeader'
+import TheSidebar from '@/components/TheSidebar'
 import $http from '@/services/httpService'
 import get from 'lodash/get'
 
 export default {
-  components: { TheHeader },
+  components: { TheSidebar },
   data() {
     return {
       form: {
@@ -55,24 +55,43 @@ export default {
       mobile: false
     }
   },
+  /************************************************************
+   * created
+   ************************************************************/
   created() {
     this.getUser()
     if(window.visualViewport.width <= 501) this.mobile = true
   },
+
+  /************************************************************
+   * computed
+   ************************************************************/
   computed: {
     disabledRegister() {
       const set = this.form.worker_number === null || this.form.name === '' || this.form.password === '' || this.password_confirm === '';
       if(set) return true
       else if(this.password_confirm !== '' && this.match === false) return true
       return false
+    },
+    mobileWidth() {
+      if(window.visualViewport.width <= 961) return true
+      return false
     }
   },
+
+  /************************************************************
+   * watch
+   ************************************************************/
   watch: {
     check(nVal) {
       if(nVal) this.form.worker_number = JSON.parse(sessionStorage.getItem('new_number'))
       else this.form.worker_number = null
     },
   },
+
+  /************************************************************
+   * methods
+   ************************************************************/
   methods: {
     async getUser() {
       const response = await $http.get('/users')

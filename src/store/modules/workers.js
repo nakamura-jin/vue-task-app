@@ -1,48 +1,35 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import teams from './modules/teams'
-import modals from './modules/modals'
-import tasks from './modules/tasks'
-import workers from './modules/workers'
+export default {
+  namespaced: true,
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  modules: {
-    teams,
-    modals,
-    tasks,
-    workers
-  },
   /**********************************************
    * state
    **********************************************/
   state: {
-    isLoading: false,
+    workers: []
   },
 
   /**********************************************
    * getters
    **********************************************/
   getters: {
-    isLoading: (state) => state.isLoading,
+    workers: (state) => state.workers,
   },
 
   /**********************************************
    * mutations
    **********************************************/
   mutations: {
-    IS_LOADING(state, bool) {
-      state.isLoading = bool;
-    },
+    WORKERS (state, object) {
+      state.workers = object
+    }
   },
 
   /**********************************************
    * actions
    **********************************************/
   actions: {
-    isLoading({ commit }, bool) {
-      commit('IS_LOADING', bool);
-    },
+    workers({ commit }, object) {
+      commit('WORKERS', object)
+    }
   },
-});
+};
