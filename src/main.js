@@ -17,6 +17,7 @@ import {
   faHouse,
   faRightFromBracket,
   faChevronDown,
+  faPen
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -28,7 +29,8 @@ library.add(
   faUser,
   faHouse,
   faRightFromBracket,
-  faChevronDown
+  faChevronDown,
+  faPen
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

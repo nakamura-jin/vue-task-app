@@ -11,7 +11,7 @@ export default {
       return this.$store.getters['teams/teams'];
     },
     mobileWidth() {
-      if (window.visualViewport.width <= 501) return true;
+      if (window.visualViewport.width <= 961) return true;
       return false;
     },
   },

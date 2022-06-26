@@ -6,7 +6,7 @@
   height: 100%;
   background-color: #fff;
   padding-top: 60px;
-  @include mq('md') {
+  @include mq('lg') {
     padding-top: 0;
   }
 
@@ -24,7 +24,7 @@
     text-align: center;
     font-size: 36px;
     font-weight: bold;
-    @include mq('md') {
+    @include mq('lg') {
       margin-bottom: 36px;
     }
   }
@@ -33,7 +33,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    @include mq('md') {
+    @include mq('lg') {
       flex-direction: row;
     }
   }
@@ -43,7 +43,7 @@
     &:last-child {
       margin-bottom: 20px;
     }
-    @include mq('md') {
+    @include mq('lg') {
       margin-right: 20px;
       padding: 0;
       &:last-child {
@@ -61,7 +61,7 @@
     padding: 20px 10px;
     border-radius: 0 0 5px 5px;
     background-color: $back-color;
-    @include mq('md') {
+    @include mq('lg') {
       width: 260px;
       min-height: 150px;
     }
@@ -72,9 +72,9 @@
     justify-content: space-between;
     align-items: flex-end;
     height: 40px;
+    padding: 0 10px;
     background: $back-color;
     color: #888;
-    padding: 0 10px;
     border-radius: 5px 5px 0 0;
   }
 
@@ -93,10 +93,12 @@
     position: absolute;
     right: 10px;
     border: none;
+    font-size: 20px;
     background: #FFF;
     cursor: pointer;
-    @include mq('md') {
+    @include mq('lg') {
       background: #eee;
+      font-size: 14px;
     }
   }
 
@@ -127,6 +129,7 @@
 
   &__title {
     margin-top: 10px;
+    font-size: 18px;
   }
 
   &__user-name {

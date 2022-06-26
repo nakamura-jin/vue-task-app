@@ -46,7 +46,7 @@ export default {
       return false
     },
     mobile() {
-      if(window.visualViewport.width <= 501) return true
+      if(window.visualViewport.width <= 961) return true
       return false
     }
   },
