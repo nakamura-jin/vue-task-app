@@ -9,7 +9,7 @@
   border-bottom: 2px solid #eee;
   background: #01015a;
   z-index: 100;
-  @include mq('md') {
+  @include mq('lg') {
     position: relative;
     height: 64px;
   }
@@ -20,7 +20,7 @@
     margin: 0 20px;
     padding: 10px 0;
     line-height: 28px;
-    @include mq('md') {
+    @include mq('lg') {
       margin: 0 30px;
       padding: 10px 0;
       line-height: 40px;
@@ -31,9 +31,9 @@
     display: flex;
     text-decoration: none;
     & img {
-      width: 28px;
-      height: 28px;
-      @include mq('md') {
+      width: 36px;
+      height: 36px;
+      @include mq('lg') {
         width: 40px;
         height: 40px;
       }
@@ -42,9 +42,10 @@
 
   &__site-title {
     margin-left: 12px;
-    font-size: 20px;
+    line-height: 36px;
+    font-size: 28px;
     color: #fff;
-    @include mq('md') {
+    @include mq('lg') {
       font-size: 24px;
     }
   }
@@ -63,7 +64,7 @@
     font-size: 20px;
     line-height: 28px;
     color: #FFF;
-    @include mq('md') {
+    @include mq('lg') {
       margin-right: 40px;
       font-size: 24px;
       line-height: 40px;
@@ -152,8 +153,9 @@
   &__list-item {
     display: flex;
     align-items: center;
-    height: 60px;
+    height: 80px;
     padding-left: 10px;
+    font-size: 20px;
     border-bottom: 1px solid $base-color;
   }
 
