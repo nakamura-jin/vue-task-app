@@ -4,9 +4,9 @@
 
 .header {
   position: fixed;
+  top: 0;
   width: 100%;
   height: 56px;
-  border-bottom: 2px solid #eee;
   background: #01015a;
   z-index: 100;
   @include mq('lg') {
@@ -46,6 +46,7 @@
     font-size: 28px;
     color: #fff;
     @include mq('lg') {
+      line-height: 40px;
       font-size: 24px;
     }
   }
@@ -62,7 +63,6 @@
     margin-top: 10px;
     margin-right: 10px;
     font-size: 20px;
-    line-height: 28px;
     color: #FFF;
     @include mq('lg') {
       margin-right: 40px;
@@ -109,8 +109,8 @@
     position: absolute;
     top: 0;
     width: 100%;
-    border: 2px solid #FFF;
-    border-radius: 20%;
+    border: 1px solid #FFF;
+    border-radius: 10%;
     transition: 0.25s;
   }
 
@@ -118,8 +118,8 @@
     position: absolute;
     top: 50%;
     width: 100%;
-    border: 2px solid #FFF;
-    border-radius: 20%;
+    border: 1px solid #FFF;
+    border-radius: 10%;
     transition: 0.25s;
   }
 
@@ -127,8 +127,8 @@
     position: absolute;
     top: 100%;
     width: 100%;
-    border: 2px solid #FFF;
-    border-radius: 20%;
+    border: 1px solid #FFF;
+    border-radius: 10%;
     transition: 0.25s;
   }
 
@@ -153,9 +153,9 @@
   &__list-item {
     display: flex;
     align-items: center;
-    height: 80px;
+    height: 60px;
     padding-left: 10px;
-    font-size: 20px;
+    font-size: 16px;
     border-bottom: 1px solid $base-color;
   }
 
