@@ -1,0 +1,24 @@
+/**
+ * Pagination
+ */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  @include mq('lg') {
+    justify-content: left;
+  }
+
+  li {
+    padding: 10px;
+    @include mq('lg') {
+      padding: 6px;
+    }
+  }
+
+  .active {
+    background: $sub-color;
+    border-radius: 50%;
+  }
+}
