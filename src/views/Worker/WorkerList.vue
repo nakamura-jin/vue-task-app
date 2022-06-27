@@ -21,7 +21,7 @@
             <td class="worker-list__number">{{ worker.worker_number }}</td>
             <td class="worker-list__name">{{ worker.name }}</td>
             <td class="worker-list__role"><span v-if="worker.role_id === 1">あり</span><span v-if="worker.role_id === 2">なし</span></td>
-            <td class="worker-list__edit"><font-awesome-icon icon="fa-solid fa-pen" /></td>
+            <td class="worker-list__edit" @click="editWorker(worker)"><font-awesome-icon icon="fa-solid fa-pen" /></td>
             <td class="worker-list__delete"><font-awesome-icon icon="fa-solid fa-trash-can" /></td>
           </tr>
         </tbody>
@@ -39,6 +39,7 @@ import TheSidebar from '@/components/TheSidebar'
 import $http from '@/services/httpService'
 import Pagination from '@/components/Pagination/Pagination.vue'
 import Store from '@/store'
+import WorkerEditModal from '@/components/Modals/WorkerEditModal.vue'
 
 export default {
   components: {
@@ -83,6 +84,11 @@ export default {
     },
     getWorkers(list) {
       this.setWorkers = list
+    },
+    editWorker(worker) {
+      this.$store.dispatch('modals/isModal', true)
+      this.$store.dispatch('modals/selectModal', WorkerEditModal)
+      this.$store.dispatch('workers/edit_worker', worker)
     }
   }
 }
