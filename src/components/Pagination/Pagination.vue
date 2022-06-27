@@ -6,7 +6,7 @@
     :page-count="getPageCount"
     :margin-pages="2"
     :click-handler="changePage"
-    :prev-text="'＜'"
+    :prext="'＜'"
     :next-text="'＞'"
     :container-class="'pagination'"
     :page-class="'page-item'"
@@ -37,6 +37,12 @@ export default {
     },
     getPageCount() {
       return this.workers.length / this.parPage
+    }
+  },
+
+  watch: {
+    workers() {
+      this.setWorkers()
     }
   },
 
