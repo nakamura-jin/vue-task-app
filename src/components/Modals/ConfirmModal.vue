@@ -21,6 +21,7 @@ export default {
   computed: {
     item() {
       if(this.$route.path === '/top') return 'グループ'
+      else if(this.$route.path === '/worker_list') return '社員'
       return 'タスク'
     }
   },
@@ -40,6 +41,12 @@ export default {
           this.$store.dispatch('modals/isModal', false)
           $blockui.close()
         })
+      } else if(this.$route.path === '/worker_list') {
+        const id = this.$store.getters['workers/delete_worker_id']
+        await $http.delete(`user/${id}`)
+        this.$store.dispatch('workers/delete_worker')
+        this.$store.dispatch('modals/isModal', false)
+        $blockui.close()
       } else {
         const id = this.$store.getters['tasks/delete_task_id']
         $http.delete(`/task/${id}`).then(() => {
