@@ -1,0 +1,159 @@
+/**
+ * WorkerEditModal
+ */
+.worker-edit {
+  margin-top: 40px;
+  &__label {
+    display: block;
+    padding-bottom: 15px;
+  }
+
+  &__input {
+    box-shadow: 0 0 0px 1000px #fff inset;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 6px 10px;
+    font-size: 16px;
+    border: 2px solid $sub-color;
+    border-radius: 5px;
+    &:first-of-type {
+      width: 30%
+    }
+  }
+
+  &__role {
+    display: flex;
+    margin: 10px 0;
+    & span:first-of-type {
+      margin-right: 10px;
+    }
+    & input:first-of-type {
+      margin: 10px;
+      margin-left: 0;
+    }
+    & input:last-of-type {
+      margin: 10px;
+      margin-left: 20px;
+    }
+  }
+
+  &__button {
+    margin-top: 20px;
+    text-align: right;
+  }
+
+  &__cancel {
+    width: 86px;
+    margin-right: 10px;
+    background: #fff;
+    color: $base-color;
+    border: 2px solid $base-color;
+  }
+
+  &__disabled {
+    background: #ccc;
+  }
+}
+
+button {
+  @include button-style(80px);
+  border: none;
+}
+
+// チェックボックス
+
+input[type=checkbox] {
+  display: none;
+  &:checked + .checkbox_label::after {
+    background: $sub-color;
+    margin-right: 10px;
+  }
+  &:checked + .checkbox_label::before {
+    position: absolute;
+    left: 2px;
+    content: '';
+    display: block;
+    width: 8px;
+    height: 15px;
+    margin: 4px;
+    border-right: 3px solid #FFF;
+    border-bottom: 3px solid #FFF;
+    transform: rotate(45deg);
+  }
+}
+
+.checkbox_label {
+  position: relative;
+}
+
+.checkbox_label {
+  &::before {
+    position: absolute;
+    content: '';
+    display: block;
+    align-items: center;
+    width: 10px;
+    height: 15px;
+    margin: 4px 4px 4px 0;
+  }
+  &::after {
+    content: '';
+    display: block;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    margin: 4px 10px 4px 0;
+    border: 1px solid orange;
+  }
+}
+
+
+// ラジオボタン
+
+input[type=radio] {
+  display: none;
+  &:checked + .radio_label::after {
+    // background: #FFF;
+    background: $base-color;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 1px solid $sub-color;
+  }
+  &:checked + .radio_label::before {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 4px;
+    background: $sub-color;
+    border-radius: 50%;
+  }
+}
+
+.radio_label {
+  position: relative;
+  margin-top: -2px;
+}
+
+.radio_label {
+  &::before {
+    position: absolute;
+    content: '';
+    display: block;
+    align-items: center;
+    width: 10px;
+    height: 15px;
+    border-radius: 50%;
+  }
+  &::after {
+    content: '';
+    display: block;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid orange;
+    border-radius: 50%;
+  }
+}

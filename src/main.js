@@ -34,6 +34,12 @@ library.add(
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
+
+// vuejs-paginate
+import Paginate from 'vuejs-paginate';
+Vue.component('paginate', Paginate);
+
+
 Vue.config.productionTip = false
 
 new Vue({

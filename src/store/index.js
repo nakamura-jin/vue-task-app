@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import teams from './modules/teams'
 import modals from './modules/modals'
 import tasks from './modules/tasks'
+import workers from './modules/workers'
 
 Vue.use(Vuex);
 
@@ -10,7 +11,8 @@ export default new Vuex.Store({
   modules: {
     teams,
     modals,
-    tasks
+    tasks,
+    workers
   },
   /**********************************************
    * state

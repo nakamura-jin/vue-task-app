@@ -20,7 +20,24 @@ const routes = [
         redirect: 'top',
       },
       {
+        path: '/register',
+        beforeEnter: authGuard,
+        component: () =>
+          import(
+            /* webpackChunkName: "Register" */ '../views/Worker/Register.vue'
+          ),
+      },
+      {
+        path: '/worker_list',
+        beforeEnter: authGuard,
+        component: () =>
+          import(
+            /* webpackChunkName: "WorkerList" */ '../views/Worker/WorkerList.vue'
+          ),
+      },
+      {
         path: 'task/:team_id',
+        beforeEnter: authGuard,
         component: () =>
           import(
             /* webpackChunkName: "TaskPage" */ '../views/Task/TaskPage.vue'
