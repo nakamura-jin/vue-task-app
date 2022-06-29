@@ -20,11 +20,23 @@
   }
 
   &__title {
-    margin: 30px 0;
+    // margin: 30px 0;
+    margin-top: 30px;
     text-align: center;
     font-size: 24px;
     @include mq('md') {
       margin-bottom: 60px;
+    }
+  }
+
+  &__mobile-register {
+    display: flex;
+    justify-content: right;
+    margin: 10px auto;
+    & button {
+      @include button-style(40);
+      border: none;
+      background: $base-color;
     }
   }
 

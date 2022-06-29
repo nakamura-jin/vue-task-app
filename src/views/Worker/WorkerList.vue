@@ -6,6 +6,9 @@
     <the-sidebar v-if="!mobile"></the-sidebar>
     <div class="worker-list__container">
       <h3 class="worker-list__title">社員一覧</h3>
+      <div class="worker-list__mobile-register">
+        <button v-if="mobile" @click="$router.push('/register')">社員登録</button>
+      </div>
       <table class="worker-list__table">
         <thead>
           <tr>
