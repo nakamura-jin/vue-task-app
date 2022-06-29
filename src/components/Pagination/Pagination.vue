@@ -6,7 +6,7 @@
     :page-count="getPageCount"
     :margin-pages="2"
     :click-handler="changePage"
-    :prext="'＜'"
+    :prev-text="'＜'"
     :next-text="'＞'"
     :container-class="'pagination'"
     :page-class="'page-item'"
@@ -36,12 +36,15 @@ export default {
       return this.$store.getters['workers/workers']
     },
     getPageCount() {
-      return this.workers.length / this.parPage
+      return Math.ceil(this.workers.length / this.parPage)
     }
   },
 
   watch: {
-    workers() {
+    workers(nVal, oVal) {
+      if(oVal.length - nVal.length === 1 && nVal.length / (this.currentPage - 1) === 10 ) {
+        return this.changePage(this.currentPage - 1)
+      }
       this.setWorkers()
     }
   },
@@ -52,6 +55,8 @@ export default {
   methods: {
     changePage(number) {
       this.currentPage = number
+      const active = document.querySelectorAll('.active')
+      console.log(active.length)
       this.setWorkers()
     },
     setWorkers() {
