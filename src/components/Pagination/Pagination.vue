@@ -55,8 +55,6 @@ export default {
   methods: {
     changePage(number) {
       this.currentPage = number
-      const active = document.querySelectorAll('.active')
-      console.log(active.length)
       this.setWorkers()
     },
     setWorkers() {
